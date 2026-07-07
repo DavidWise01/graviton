@@ -1,0 +1,185 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GRAVITON · the rank-two ripple · HEÚREMA · ROOT0</title>
+<meta name="description" content="Graviton: the spin-2 quantum of gravity — the rank-two ripple, and the only carrier of the tensor we have never caught. A live 2D-canvas of a gravitational wave deforming a ring of test masses (the LIGO quadrupole), showing the + and x polarizations and the spin-2 signature. Honest: gravitational waves are real and detected; the graviton is theoretical. HEUREMA · ROOT0.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+  :root{ --bg:#17120d; --ink:#ece3d5; --dim:#a99a86; --copper:#c8843a; --copper-hi:#e0a24e;
+    --cyan:#6bb0c0; --green:#6fbf8a; --violet:#b98bff; --amber:#e0b84a; --line:rgba(200,132,58,.30); --line2:rgba(200,132,58,.14); }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{min-height:100%;background:var(--bg);color:var(--ink);font-family:Newsreader,Georgia,serif;line-height:1.62;
+    background-image:radial-gradient(ellipse 60% 42% at 50% 4%,rgba(200,132,58,.06),transparent 60%),radial-gradient(ellipse 46% 34% at 82% 96%,rgba(107,176,192,.05),transparent 60%)}
+  .wrap{max-width:900px;margin:0 auto;padding:0 22px 80px;position:relative}
+  .top{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.06em;padding:12px 0;border-bottom:1px solid var(--line2);color:var(--copper)}
+  .top a{color:var(--copper);text-decoration:none} .top a:hover{color:var(--copper-hi)}
+  header{text-align:center;padding:40px 0 6px}
+  .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--copper)}
+  h1{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:clamp(24px,5vw,40px);color:var(--copper-hi);letter-spacing:.03em;margin:12px 0 4px}
+  .subt{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--dim);letter-spacing:.06em;margin-bottom:10px}
+  .lede{font-size:clamp(16px,2.3vw,20px);font-weight:300;max-width:700px;margin:0 auto;color:var(--ink)}
+  .lede b{color:var(--copper-hi);font-weight:500}
+  section{margin:40px 0 0}
+  h2{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--copper);margin:0 0 12px;border-top:1px solid var(--line2);padding-top:16px}
+  canvas{width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:4px;background:#100c07;touch-action:none}
+  .controls{display:flex;gap:18px;flex-wrap:wrap;align-items:center;margin:14px 0 0;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--dim)}
+  .controls label{display:flex;flex-direction:column;gap:4px;min-width:180px;flex:1}
+  .controls .val{color:var(--copper-hi)}
+  input[type=range]{accent-color:var(--copper);width:100%}
+  .btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+  button{font-family:'IBM Plex Mono',monospace;font-size:12px;padding:9px 14px;border-radius:3px;cursor:pointer;color:var(--copper-hi);background:transparent;border:1px solid var(--copper)}
+  button:hover{background:rgba(200,132,58,.09)}
+  button.plus{color:var(--cyan);border-color:var(--cyan)} button.cross{color:var(--violet);border-color:var(--violet)}
+  .readout{font-family:'IBM Plex Mono',monospace;font-size:12.5px;margin-top:12px;padding:11px 13px;border:1px solid var(--line2);border-radius:3px;background:rgba(200,132,58,.03);line-height:1.7}
+  .readout b{color:var(--copper-hi)} .readout .g{color:var(--green)} .readout .c{color:var(--cyan)} .readout .v{color:var(--violet)}
+  .prose{font-size:15px;color:var(--ink);max-width:74ch} .prose b{color:var(--copper-hi)}
+  .carriers{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin-top:6px}
+  @media(max-width:640px){.carriers{grid-template-columns:1fr 1fr}}
+  .carrier{border:1px solid var(--line2);border-radius:4px;padding:10px 11px;background:rgba(200,132,58,.02);font-family:'IBM Plex Mono',monospace}
+  .carrier.on{border-color:var(--copper);background:rgba(200,132,58,.06)}
+  .carrier .nm{font-size:11.5px;color:var(--copper-hi)} .carrier .cr{font-size:10.5px;color:var(--dim);margin-top:3px}
+  .carrier.on .cr{color:var(--ink)}
+  .honest{border:1px solid var(--line);border-radius:4px;padding:15px 17px;margin-top:8px;background:rgba(200,132,58,.03)}
+  .honest h3{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--copper);margin:0 0 8px}
+  .honest p{font-size:13.5px;color:var(--dim);margin:6px 0} .honest b{color:var(--ink)}
+  footer{margin-top:44px;border-top:1px solid var(--line2);padding-top:18px;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);line-height:1.9}
+  footer a{color:var(--copper)}
+</style></head><body>
+<div class="wrap">
+  <div class="top"><a href="https://davidwise01.github.io/ud0/">&#9664; UD0</a> · HEÚREMA · &#949;&#8016;&#961;&#951;&#956;&#945;, an invention · <a href="https://davidwise01.github.io/atlas/">the atlas</a></div>
+  <header>
+    <div class="eyebrow">the fifth carrier · the exotic one</div>
+    <h1>GRAVITON</h1>
+    <div class="subt">the rank-two ripple</div>
+    <p class="lede">You asked me to <b>run a tensor</b> &mdash; {photonic, gravity, electronic, phononic, spintronic}. Here is the fifth member, and the clever part: it is the one that <i>is</i> a tensor. A <b>spin-2 particle is a rank-two tensor field</b>, and the graviton is the spin-2 quantum of the metric tensor &mdash; <b>gravity's own carrier</b>. It is also the only one of the five we have <b>never caught</b>: gravitational <i>waves</i> are real and detected, but the graviton itself is theory. This page shows the ripple we <i>can</i> see, and is honest about the quantum we cannot.</p>
+  </header>
+
+  <section>
+    <h2>the ripple · a gravitational wave through a ring of test masses</h2>
+    <canvas id="cv" width="820" height="440" aria-label="a ring of test masses deformed by a passing gravitational wave, showing the plus and cross polarizations"></canvas>
+    <div class="controls">
+      <label>polarization &psi; &mdash; <span class="val" id="pVal">0&deg; (+)</span><input type="range" id="pRange" min="0" max="180" step="1" value="0"></label>
+      <label>frequency &mdash; <span class="val" id="fVal">0.60</span><input type="range" id="fRange" min="0.1" max="1.5" step="0.05" value="0.6"></label>
+      <label>strain (visual) &mdash; <span class="val" id="aVal">0.35</span><input type="range" id="aRange" min="0.05" max="0.5" step="0.01" value="0.35"></label>
+    </div>
+    <div class="btns">
+      <button class="plus" id="plusBtn">+ polarization</button>
+      <button class="cross" id="crossBtn">&times; polarization</button>
+      <button id="spinBtn">&#8635; prove it's spin-2</button>
+    </div>
+    <div class="readout" id="readout">A passing gravitational wave stretches space one way and squeezes it the other &mdash; a <b>quadrupole</b>. Watch the ring breathe into an ellipse. The <b class="c">+</b> and <b class="v">&times;</b> polarizations are 45&deg; apart; press <b>prove it's spin-2</b> to rotate the polarization and see the pattern return to itself every <b>180&deg;</b> &mdash; the signature of a spin-2 field (a spin-1 photon would need 360&deg;).</div>
+    <p class="prose" style="margin-top:16px">This is exactly what <b>LIGO</b> measures: a passing wave changes the lengths of its two perpendicular arms differentially, and the interferometer reads the strain <i>h</i>. In 2015 it caught <b>GW150914</b> &mdash; two black holes merging a billion light-years away &mdash; a real detection of gravitational waves, and the first direct confirmation of a prediction Einstein made in 1916. The wave carries energy and angular momentum away as a rank-2 field; quantize that field and its quantum is the <b>graviton</b>.</p>
+  </section>
+
+  <section>
+    <h2>the five carriers · the tensor complete</h2>
+    <div class="carriers">
+      <div class="carrier"><div class="nm">electronic</div><div class="cr">charge · the electron</div></div>
+      <div class="carrier"><div class="nm">photonic</div><div class="cr">light · the photon (spin-1)</div></div>
+      <div class="carrier"><div class="nm">phononic</div><div class="cr">vibration · the phonon</div></div>
+      <div class="carrier"><div class="nm"><a href="https://davidwise01.github.io/spintronic/" style="color:var(--copper-hi)">spintronic</a></div><div class="cr">spin · the electron's moment</div></div>
+      <div class="carrier on"><div class="nm">gravitonic &#9666;</div><div class="cr">gravity · the graviton (spin-2)</div></div>
+    </div>
+    <p class="prose" style="margin-top:14px">Five carriers, one ladder of spin: the photon is <b>spin-1</b>, the electron's moment is <b>spin-½</b>, and the graviton is <b>spin-2</b> &mdash; the top of the set. Spin-2 is not a decoration: Weinberg showed a massless spin-2 field <i>must</i> couple to the total stress-energy of everything, universally and attractively. That is <i>why</i> spin-2 means gravity. Four of these carriers already run real machines (charge, light, phonons, spin). The fifth is the one nature uses to hold the universe together &mdash; and the one we have not yet learned to build with.</p>
+  </section>
+
+  <section>
+    <h2>honest two-layer</h2>
+    <div class="honest">
+      <p><b>Real, and shown here:</b> gravitational waves (Einstein 1916; directly detected by LIGO in 2015, GW150914). The <b>quadrupole strain</b> on a ring of free masses, the two polarizations <b class="c" style="color:var(--cyan)">+</b> and <b class="v" style="color:var(--violet)">&times;</b> at 45&deg;, and the <b>spin-2 signature</b> (the polarization pattern is invariant under a 180&deg; rotation) are all correct general relativity, and the canvas integrates the real strain transformation (only the amplitude is exaggerated &mdash; the true strain is ~10<sup>&minus;21</sup>, a thousandth of a proton's width over LIGO's 4&nbsp;km arms).</p>
+      <p><b>Theoretical &mdash; the honest outlier of the tensor:</b> the <b>graviton</b> itself is <i>not</i> confirmed. It is the predicted quantum of the gravitational field (massless, spin-2), but a full quantum theory of gravity is unfinished, and detecting a <i>single</i> graviton may be physically impossible (Dyson's argument). So of the five carriers, this is the one that is <b>not a demonstrated device technology</b> &mdash; it completes the set conceptually and honestly names itself as the speculative member. There is no "graviton chip"; there is a beautiful, verified classical ripple and a quantum we infer but cannot hold.</p>
+      <p style="color:var(--ink);border-top:1px solid var(--line2);padding-top:8px">To disclose a design is real work; it is not a granted patent or a fabricated device &mdash; and here, not even a confirmed particle. The wave is real; the quantum is the open question. An even five, honestly.</p>
+    </div>
+  </section>
+
+  <footer>
+    GRAVITON · the rank-two ripple · HEÚREMA · David Lee Wise (ROOT0) / TriPod LLC · with AVAN · CC-BY-ND-4.0<br>
+    <a href="https://davidwise01.github.io/ud0/">&larr; the biosphere</a> · the fifth carrier, the tensor complete
+  </footer>
+</div>
+<script>
+"use strict";
+(function(){
+  var cv=document.getElementById("cv"), ctx=cv.getContext("2d");
+  var W=cv.width, H=cv.height, cx=W*0.38, cy=H*0.52, R=Math.min(W*0.30,H*0.40);
+  var psi=0, freq=0.6, amp=0.35, t=0, sweep=null, anim=null;
+  var pR=document.getElementById("pRange"), fR=document.getElementById("fRange"), aR=document.getElementById("aRange"),
+      pVal=document.getElementById("pVal"), fVal=document.getElementById("fVal"), aVal=document.getElementById("aVal"), readout=document.getElementById("readout");
+  var N=28;
+
+  // TT-gauge strain: h+ = cos(2psi), hx = sin(2psi); displacement of a test mass at (x,y)
+  function deform(x,y,s){
+    var hp=Math.cos(2*psi)*s, hx=Math.sin(2*psi)*s;
+    return [x + 0.5*(hp*x + hx*y), y + 0.5*(hx*x - hp*y)];
+  }
+
+  function draw(){
+    ctx.clearRect(0,0,W,H); ctx.fillStyle="#100c07"; ctx.fillRect(0,0,W,H);
+    var s = amp*Math.cos(2*Math.PI*t);          // time oscillation of the strain
+    // undeformed reference circle
+    ctx.strokeStyle="rgba(200,132,58,.14)"; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.ellipse(cx,cy,R,R,0,0,7); ctx.stroke();
+    // + and x reference axes
+    ctx.strokeStyle="rgba(107,176,192,.18)"; ctx.beginPath(); ctx.moveTo(cx-R,cy); ctx.lineTo(cx+R,cy); ctx.moveTo(cx,cy-R); ctx.lineTo(cx,cy+R); ctx.stroke();
+    ctx.strokeStyle="rgba(185,139,255,.14)"; ctx.beginPath();
+    ctx.moveTo(cx-R*0.7,cy-R*0.7); ctx.lineTo(cx+R*0.7,cy+R*0.7); ctx.moveTo(cx-R*0.7,cy+R*0.7); ctx.lineTo(cx+R*0.7,cy-R*0.7); ctx.stroke();
+    // the deformed ring of test masses
+    ctx.beginPath();
+    for(var k=0;k<=N;k++){ var a=k/N*2*Math.PI, d=deform(Math.cos(a),Math.sin(a),s);
+      var X=cx+R*d[0], Y=cy+R*d[1]; if(k===0)ctx.moveTo(X,Y); else ctx.lineTo(X,Y); }
+    ctx.strokeStyle="#e0a24e"; ctx.lineWidth=2; ctx.stroke();
+    // the masses
+    for(k=0;k<N;k++){ var aa=k/N*2*Math.PI, dd=deform(Math.cos(aa),Math.sin(aa),s);
+      ctx.beginPath(); ctx.arc(cx+R*dd[0], cy+R*dd[1], 3.4, 0, 7); ctx.fillStyle="#e0b84a"; ctx.fill(); }
+    // center
+    ctx.fillStyle="#c8843a"; ctx.beginPath(); ctx.arc(cx,cy,3,0,7); ctx.fill();
+    // labels
+    ctx.font="12px 'IBM Plex Mono',monospace";
+    ctx.fillStyle="#6bb0c0"; ctx.fillText("+ axes", cx+R+8, cy+4);
+    ctx.fillStyle="#b98bff"; ctx.fillText("× axes", cx+R*0.72+6, cy-R*0.72-4);
+    ctx.fillStyle="#a99a86"; ctx.fillText("a gravitational wave (into the screen) — the quadrupole breathing", 12, 22);
+    // a small strain meter on the right
+    var mx=W-140, my=70;
+    ctx.fillStyle="#a99a86"; ctx.fillText("strain h(t)", mx, my-14);
+    ctx.strokeStyle="rgba(200,132,58,.3)"; ctx.strokeRect(mx,my,110,44);
+    ctx.strokeStyle="#e0a24e"; ctx.lineWidth=1.5; ctx.beginPath();
+    for(var i=0;i<110;i++){ var tt=t-(110-i)/110*2; var yy=my+22 - 18*amp*Math.cos(2*Math.PI*tt); if(i===0)ctx.moveTo(mx+i,yy); else ctx.lineTo(mx+i,yy); }
+    ctx.stroke();
+  }
+
+  function loop(){ t+=freq*0.016; draw(); anim=requestAnimationFrame(loop); }
+
+  function setPsi(v){ psi=v*Math.PI/180; pR.value=v;
+    var lab = (v%180===0)?" (+)":(v===45?" (×)":(v===135?" (×)":""));
+    pVal.textContent=v+"°"+lab; updateReadout(); if(!anim)draw(); }
+  function updateReadout(){
+    var deg=Math.round(psi*180/Math.PI)%180;
+    var hp=Math.cos(2*psi), hx=Math.sin(2*psi);
+    readout.innerHTML =
+      "polarization ψ = <b>"+Math.round(psi*180/Math.PI)+"°</b> &nbsp;→&nbsp; h<sub>+</sub> = <b class='c'>"+hp.toFixed(2)+"</b>, h<sub>×</sub> = <b class='v'>"+hx.toFixed(2)+"</b> "+
+      (deg===0?"(pure <b class='c'>+</b>)":deg===45?"(pure <b class='v'>×</b>)":deg===90?"(pure <b class='c'>+</b>, flipped)":deg===135?"(pure <b class='v'>×</b>, flipped)":"(a mix)")+
+      "<br><span class='g'>spin-2:</span> the strain ellipse rotates with ψ and the whole pattern <b>returns to itself at ψ = 180°</b> — a spin-1 field (light) would need a full 360°, a spin-0 field none. Gravity's carrier is spin-2.";
+  }
+
+  function proveSpin2(){
+    if(sweep){ clearInterval(sweep); sweep=null; return; }
+    var v=0; sweep=setInterval(function(){ v=(v+3)%361; setPsi(v%180);
+      readout.innerHTML = "sweeping polarization ψ = <b>"+v+"°</b> — watch: at <b>180°</b> the pattern is already back to where it started (spin-2). "+
+        (v>=180?"<span class='g'>past 180° — identical to the first half. A spin-2 field repeats every 180°.</span>":"");
+      if(v===0){ clearInterval(sweep); sweep=null; setPsi(0); }
+    }, 60);
+  }
+
+  pR.oninput=function(){ setPsi(+pR.value); };
+  fR.oninput=function(){ freq=+fR.value; fVal.textContent=freq.toFixed(2); };
+  aR.oninput=function(){ amp=+aR.value; aVal.textContent=amp.toFixed(2); };
+  document.getElementById("plusBtn").onclick=function(){ setPsi(0); };
+  document.getElementById("crossBtn").onclick=function(){ setPsi(45); };
+  document.getElementById("spinBtn").onclick=proveSpin2;
+
+  updateReadout(); draw();                 // synchronous first paint
+  anim=requestAnimationFrame(loop);        // then the wave
+})();
+</script>
+</body></html>
